@@ -7,6 +7,31 @@
         font-size: 42px;
         text-align: center;
         font-family: "open-sans", sans-serif;
+        margin-bottom: 1.5rem;
+    }
+
+    .recommended {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 20px;
+        font-family: "open-sans", sans-serif;
+        font-size: 18px;
+        padding: 2rem 5rem;
+
+        span {
+            font-size: 20px;
+        }
+
+        .properties {
+            display: flex;
+            align-items: center;
+            column-gap: 1rem;
+
+            li {
+                font-weight: bold;
+            }
+        }
     }
 
     .search-bar {

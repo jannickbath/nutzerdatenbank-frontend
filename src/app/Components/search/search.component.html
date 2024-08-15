@@ -6,5 +6,13 @@
         </label>
         <input type="text" id="search" placeholder="Suche nach Nutzern">
     </div>
+    <div class="recommended">
+        <span>Empfohlen: </span>
+        <ul class="properties">
+            <li *ngFor="let field of fields">
+                {{ field }}
+            </li>
+        </ul>
+    </div>
 </div>
 
