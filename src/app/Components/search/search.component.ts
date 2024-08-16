@@ -36,6 +36,7 @@ export class SearchComponent {
   ];
   public users: Array<User> = [];
   private _search = "";
+  private _debounceTimeout: any = null;
 
   constructor (public apiService: ApiService) {
     this.fetchUsers();
@@ -43,8 +44,16 @@ export class SearchComponent {
 
   public handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    this._search = target.value;   
-    this.fetchUsers(); 
+    this._search = target.value;
+
+    // Deletes the previous timeout, if one exists.
+    if (this._debounceTimeout) {
+      clearTimeout(this._debounceTimeout);
+    }
+
+    this._debounceTimeout = setTimeout(() => {
+      this.fetchUsers();
+    }, 200);
   }
 
   public toggleField(event: Event) {
