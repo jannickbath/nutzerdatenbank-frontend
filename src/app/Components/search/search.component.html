@@ -4,7 +4,7 @@
         <label for="search">
             <img src="search.png" alt="">
         </label>
-        <input type="text" id="search" placeholder="Suche nach Nutzern">
+        <input type="text" id="search" (input)="handleInput($event)" placeholder="Suche nach Nutzern">
     </div>
     <div class="recommended">
         <span>Empfohlen: </span>
@@ -14,5 +14,13 @@
             </li>
         </ul>
     </div>
+    <ul class="results">
+        <li *ngFor="let user of this.users" class="user">
+            <span>Vorname: {{ user.first_name }}</span>
+            <span>Nachname: {{ user.last_name }}</span>
+            <span>Benutzername: {{ user.username }}</span>
+            <span>E-Mail: {{ user.email }}</span>
+        </li>
+    </ul>
 </div>
 

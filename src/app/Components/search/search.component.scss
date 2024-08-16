@@ -68,4 +68,19 @@
             height: 25px;
         }
     }
+    
+    .results {
+        display: grid;
+    }
+
+    .user {
+        display: grid;
+        padding: 0.5rem 1rem;
+        border: 1px solid green;
+        border-top: none;
+
+        &:first-child {
+            border-top: 1px solid green;
+        }
+    }
 }
