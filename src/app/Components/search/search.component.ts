@@ -68,8 +68,8 @@ export class SearchComponent {
   }
 
   private fetchUsers(): void {
-    const baseUrl = "http://nutzerdatenbank-backend.loc/users";
-    let url = this._search ? (baseUrl + "?search=" + this._search) : baseUrl;
+    const baseUrl = "http://nutzerdatenbank-backend.loc/users?limit=5";
+    let url = this._search ? (baseUrl + "&search=" + this._search) : baseUrl;
     const activeFields = this.fields.filter(field => field.active);
 
     if (this._search && activeFields.length > 0) {
