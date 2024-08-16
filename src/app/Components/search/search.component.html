@@ -9,7 +9,7 @@
     <div class="recommended">
         <span>Empfohlen: </span>
         <ul class="properties">
-            <li *ngFor="let field of fields" class="property" [class.active]="field.active" (click)="toggleField($event)">
+            <li *ngFor="let field of fields; let i = index" class="property" [class.active]="field.active" (click)="toggleField($event)" [attr.data-index]="i">
                 {{ field.name }}
             </li>
         </ul>
