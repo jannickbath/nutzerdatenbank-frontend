@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ApiService } from '../../Services/api.service';
 import { ApiUserResponse, User } from '../../Types';
 
 type Field = {
@@ -38,7 +37,7 @@ export class SearchComponent {
   private _search = "";
   private _debounceTimeout: any = null;
 
-  constructor (public apiService: ApiService) {
+  constructor () {
     this.fetchUsers();
   }
 
