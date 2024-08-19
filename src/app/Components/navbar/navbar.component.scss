@@ -1,0 +1,16 @@
+.navbar {
+    // display: flex;
+    // align-items: center;
+    padding: 15px 50px;
+
+    .add-user {
+        width: 35px;
+        height: 35px;
+        display: block;
+        // object-fit: contain;
+        margin-left: auto;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+}
