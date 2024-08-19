@@ -66,8 +66,9 @@ export class SearchComponent {
     this.fetchUsers();
   }
 
+  // TODO: Add pagination, if more results than 4
   private fetchUsers(): void {
-    const baseUrl = "http://nutzerdatenbank-backend.loc/users?limit=5";
+    const baseUrl = "http://nutzerdatenbank-backend.loc/users?limit=4";
     let url = this._search ? (baseUrl + "&search=" + this._search) : baseUrl;
     const activeFields = this.fields.filter(field => field.active);
 
