@@ -36,6 +36,7 @@ export class SearchComponent {
   public users: Array<User> = [];
   private _search = "";
   private _debounceTimeout: any = null;
+  private _offset = 0;
 
   constructor () {
     this.fetchUsers();
@@ -66,9 +67,15 @@ export class SearchComponent {
     this.fetchUsers();
   }
 
-  // TODO: Add pagination, if more results than 4
-  private fetchUsers(): void {
-    const baseUrl = "http://nutzerdatenbank-backend.loc/users?limit=4";
+  public loadMore() {
+    const itemsToLoad = 2;
+    this._offset += itemsToLoad;
+    this.fetchUsers(itemsToLoad, this._offset);
+  }
+  
+  private fetchUsers(limit: number = 4, offset: number = 0): void {
+    console.log(limit, offset);
+    const baseUrl = `http://nutzerdatenbank-backend.loc/users?limit=${limit}&offset=${offset}`;
     let url = this._search ? (baseUrl + "&search=" + this._search) : baseUrl;
     const activeFields = this.fields.filter(field => field.active);
 
@@ -80,7 +87,11 @@ export class SearchComponent {
     fetch(url)
       .then(res => res.json())
       .then((json: ApiUserResponse) => {
-        this.users = json.users;
+        if (offset > 0) {
+          this.users = [...this.users, ...json.users];
+        }else {
+          this.users = json.users;
+        }
       });
   }
 }
