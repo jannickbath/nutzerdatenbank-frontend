@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SidebarService } from '../../Services/sidebar.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,18 +9,16 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  private _active = true;
-
   get active() {
-    return this._active;
+    return this.sideBarService.active;
   }
 
   public close() {
-    this._active = false;
+    this.sideBarService.active = false;
   }
 
   public open() {
-    this._active = true;
+    this.sideBarService.active = true;
   }
 
   public handleSubmit() {
@@ -27,4 +26,6 @@ export class SidebarComponent {
     // TODO: Show success popup
     this.close();
   }
+
+  constructor (public sideBarService: SidebarService) { }
 }
