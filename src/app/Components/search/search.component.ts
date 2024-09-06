@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ApiUserResponse, User } from '../../Types';
+import { SidebarService } from '../../Services/sidebar.service';
 
 type Field = {
   name: string;
@@ -38,7 +39,7 @@ export class SearchComponent {
   private _debounceTimeout: any = null;
   private _offset = 0;
 
-  constructor () {
+  constructor (private sideBarService: SidebarService) {
     this.fetchUsers();
   }
 
@@ -71,6 +72,13 @@ export class SearchComponent {
     const itemsToLoad = 2;
     this._offset += itemsToLoad;
     this.fetchUsers(itemsToLoad, this._offset);
+  }
+
+  // Show user details in sidebar
+  public handleUserClick(userId: number) {
+    // console.log("triggered", userId);
+    // this.sideBarService.activeInfoId = userId;
+    this.sideBarService.updateUserDetails(userId);
   }
   
   private fetchUsers(limit: number = 4, offset: number = 0): void {
