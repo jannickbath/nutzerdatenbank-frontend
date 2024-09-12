@@ -1,14 +1,16 @@
-FROM node:19
+FROM alpine
 
 ENV DEBIAN_FRONTEND=noninteractive 
 
-COPY . /project
-
+COPY dist/browser /project
 WORKDIR /project
 
-RUN npm install -g @angular/cli
-RUN npm install
+RUN apk update
+RUN apk upgrade
+RUN apk add python3
+
+RUN chmod +x ./start.sh
 
 EXPOSE 4200
 
-CMD ng serve --host 0.0.0.0
+CMD python3 -m http.server 4200
