@@ -1,4 +1,49 @@
 <div class="sidebar-info" [class.active]="this.active">
-    <p>{{this.sideBarService.userDetails[0]?.first_name}}</p>
+    <h3>Nutzerdetails</h3>
+    <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame">
+        <div class="user form-grid">
+            <div class="firstname">
+                <label for="firstname">Vorname:</label>
+                <input type="text" id="firstname" name="first_name" [value]="this.getField('first_name')">
+            </div>
+            <div class="lastname">
+                <label for="lastname">Nachname:</label>
+                <input type="text" id="lastname" name="last_name" [value]="this.getField('last_name')">
+            </div>
+            <div class="username">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username" [value]="this.getField('username')">
+            </div>
+            <div class="email">
+                <label for="email">E-Mail-Adresse:</label>
+                <input type="text" id="email"  name="email" [value]="this.getField('email')">
+            </div>
+        </div>
+        <div class="location form-grid">
+            <div class="street w-full">
+                <label for="street">Straße und Hausnummer:</label>
+                <input type="text" id="street" name="street" [value]="this.getField('street')">
+            </div>
+            <div class="plz">
+                <label for="plz">PLZ:</label>
+                <input type="text" id="plz" name="plz" [value]="this.getField('plz')">
+            </div>
+            <div class="city">
+                <label for="city">Stadt:</label>
+                <input type="text" id="city" name="city" [value]="this.getField('city')">
+            </div>
+        </div>
+        <div class="other form-grid">
+            <div class="personnel_number">
+                <label for="personnel_number">Personalnummer:</label>
+                <input type="text" id="personnel_number" name="personnel_number" [value]="this.getField('personnel_number')">
+            </div>
+        </div>
+        <button type="submit">Benutzer anlegen</button>
+    </form>
+
+    <div class="close" (click)="close()">
+        <img src="/close.png" alt="">
+    </div>
 </div>
 

@@ -9,8 +9,21 @@
     overflow: hidden;
     z-index: 10;
 
+    h3 {
+        margin-bottom: 20px;
+    }
+
     &.active {
         max-width: 100%;
         padding: 1rem 1.5rem;
+    }
+
+    .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        cursor: pointer;
     }
 }
