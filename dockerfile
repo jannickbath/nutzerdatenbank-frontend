@@ -1,16 +1,14 @@
 FROM alpine
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 
-COPY dist/browser /project
+COPY . /project
 WORKDIR /project
 
 RUN apk update
 RUN apk upgrade
 RUN apk add python3
 
-RUN chmod +x ./start.sh
-
 EXPOSE 4200
 
-CMD python3 -m http.server 4200
+CMD python3 -m http.server --directory dist/db-solution/browser 4200
