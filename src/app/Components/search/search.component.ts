@@ -35,6 +35,7 @@ export class SearchComponent {
     }
   ];
   public users: Array<User> = [];
+  public activeDetailsUserId: number | null = null;
   private _search = "";
   private _debounceTimeout: any = null;
   private _offset = 0;
@@ -76,9 +77,8 @@ export class SearchComponent {
 
   // Show user details in sidebar
   public handleUserClick(userId: number) {
-    // console.log("triggered", userId);
-    // this.sideBarService.activeInfoId = userId;
     this.sideBarService.updateUserDetails(userId);
+    this.activeDetailsUserId = userId;
   }
   
   private fetchUsers(limit: number = 4, offset: number = 0): void {

@@ -128,6 +128,14 @@
         &:hover::after {
             max-width: 200px;
         }
+
+        &:hover {
+            border: 1px solid #1E90FF;
+        }
+
+        &.active {
+            border: 2px solid #1E90FF !important;
+        }
     }
 
     .pagination {
