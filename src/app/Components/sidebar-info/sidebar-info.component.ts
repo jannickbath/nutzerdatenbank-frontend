@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarService } from '../../Services/sidebar.service';
 import { CommonModule } from '@angular/common';
-import { User } from '../../Types';
+import { ApiService } from '../../Services/api.service';
 
 type UserField = "first_name" | "last_name" | "username" | "email" | "street" | "plz" | "city" | "personnel_number";
 
@@ -33,5 +33,12 @@ export class SidebarInfoComponent {
     return "";
   }
 
-  constructor (public sideBarService: SidebarService) { }
+  public handleSubmit() {
+    // Give the server some time for the form to be processed, before updating the user list
+    setTimeout(() => {
+      this.apiService.fetchUsers();
+    }, 1000);
+  }
+
+  constructor (public sideBarService: SidebarService, private apiService: ApiService) { }
 }

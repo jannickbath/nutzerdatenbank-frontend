@@ -1,6 +1,6 @@
 <div class="sidebar-info" [class.active]="this.active">
     <h3>Nutzerdetails</h3>
-    <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame">
+    <form action="http://nutzerdatenbank-backend.loc/users/update" method="post" target="submit-frame" (submit)="handleSubmit()">
         <div class="user form-grid">
             <div class="firstname">
                 <label for="firstname">Vorname:</label>
@@ -38,6 +38,15 @@
                 <label for="personnel_number">Personalnummer:</label>
                 <input type="text" id="personnel_number" name="personnel_number" [value]="this.getField('personnel_number')">
             </div>
+        </div>
+        <input type="text" id="id" name="id" [value]="sideBarService.activeDetailsUserId" class="hidden" hidden>
+        <div class="portal-verknuepfungen">
+            <a href="#" class="personio" title="Mit Personio verbinden">
+                <img src="/personio.png" alt="">
+            </a>
+            <a href="#" class="miradore" title="Mit Miradore verbinden">
+                <img src="/miradore.png" alt="">
+            </a>
         </div>
         <button type="submit">Benutzer aktualisieren</button>
     </form>

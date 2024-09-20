@@ -26,3 +26,9 @@ export type ApiUserResponse = {
 export type ApiUserDetailResponse = {
     users: Array<MergedUserAdress>
 }
+
+export type SearchCategory = {
+    name: string;
+    value: string;
+    active: boolean;
+}
