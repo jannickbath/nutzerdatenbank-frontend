@@ -13,19 +13,6 @@ type UserField = "first_name" | "last_name" | "username" | "email" | "street" | 
   styleUrl: './sidebar-info.component.scss'
 })
 export class SidebarInfoComponent {
-  // public get userDetails() {
-  //   if (this.sideBarService.userDetails.length > 0) {
-  //     console.log(this.sideBarService.userDetails[0]);
-  //     return this.sideBarService.userDetails[0];
-  //   }
-
-  //   return [];
-  // }
-
-  // public get first_name() {
-  //   return this.sideBarService.userDetails[0].first_name;
-  // }
-
   public get active (): boolean {
     if (this.sideBarService.userDetails.length > 0) {
       return true;
@@ -36,6 +23,7 @@ export class SidebarInfoComponent {
 
   public close() {
     this.sideBarService.userDetails = [];
+    this.sideBarService.activeDetailsUserId = null;
   }
 
   public getField(field: UserField) {

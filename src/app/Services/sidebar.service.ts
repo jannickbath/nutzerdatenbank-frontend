@@ -7,6 +7,7 @@ import { ApiUserDetailResponse, ApiUserResponse, MergedUserAdress, User } from '
 export class SidebarService {
   public active = false;
   public userDetails: Array<MergedUserAdress> = [];
+  public activeDetailsUserId: number | null = null;
 
   public updateUserDetails(userId: number) {
     const url = `http://nutzerdatenbank-backend.loc/users?id=${userId}`;
@@ -19,8 +20,6 @@ export class SidebarService {
           this.userDetails = json.users;
         }
       });
-
-    console.log(this.userDetails);
   }
 
   constructor() { }

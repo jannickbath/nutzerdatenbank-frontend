@@ -35,13 +35,16 @@ export class SearchComponent {
     }
   ];
   public users: Array<User> = [];
-  public activeDetailsUserId: number | null = null;
   private _search = "";
   private _debounceTimeout: any = null;
   private _offset = 0;
 
   constructor (private sideBarService: SidebarService) {
     this.fetchUsers();
+  }
+
+  public get activeUserId() {
+    return this.sideBarService.activeDetailsUserId;
   }
 
   public handleInput(event: Event) {
@@ -78,7 +81,7 @@ export class SearchComponent {
   // Show user details in sidebar
   public handleUserClick(userId: number) {
     this.sideBarService.updateUserDetails(userId);
-    this.activeDetailsUserId = userId;
+    this.sideBarService.activeDetailsUserId = userId;
   }
   
   private fetchUsers(limit: number = 4, offset: number = 0): void {

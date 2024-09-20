@@ -15,7 +15,7 @@
         </ul>
     </div>
     <ul class="results">
-        <li *ngFor="let user of this.users" [class.active]="activeDetailsUserId == user.id" class="user" (click)="handleUserClick(user.id)">
+        <li *ngFor="let user of this.users" [class.active]="activeUserId == user.id" class="user" (click)="handleUserClick(user.id)">
             <span>Vorname: {{ user.first_name }}</span>
             <span>Nachname: {{ user.last_name }}</span>
             <span>Benutzername: {{ user.username }}</span>
