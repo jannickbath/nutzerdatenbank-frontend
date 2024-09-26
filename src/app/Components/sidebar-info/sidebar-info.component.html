@@ -38,13 +38,17 @@
                 <label for="personnel_number">Personalnummer:</label>
                 <input type="text" id="personnel_number" name="personnel_number" [value]="this.getField('personnel_number')">
             </div>
+            <div class="personio_number">
+                <label for="personio_number">Personionummer:</label>
+                <input type="text" id="personio_number" name="personio_number" [value]="this.getField('personio_number')">
+            </div>
         </div>
         <input type="text" id="id" name="id" [value]="sideBarService.activeDetailsUserId" class="hidden" hidden>
         <div class="portal-verknuepfungen">
-            <a href="#" class="personio" title="Mit Personio verbinden">
+            <a target="_blank" rel="noopener noreferrer" [href]="personioLink" class="personio" title="Personio-Profil aufrufen">
                 <img src="/personio.png" alt="">
             </a>
-            <a href="#" class="miradore" title="Mit Miradore verbinden">
+            <a href="#" class="miradore disabled" title="Mit Miradore verbinden">
                 <img src="/miradore.png" alt="">
             </a>
         </div>

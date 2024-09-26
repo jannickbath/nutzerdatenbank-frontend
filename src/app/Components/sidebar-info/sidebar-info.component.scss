@@ -18,6 +18,11 @@
         padding: 1rem 1.5rem;
     }
 
+    .disabled {
+        opacity: 0.5;
+        cursor:not-allowed !important;
+    }
+
     .close {
         width: 20px;
         height: 20px;

@@ -3,7 +3,7 @@ import { SidebarService } from '../../Services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../Services/api.service';
 
-type UserField = "first_name" | "last_name" | "username" | "email" | "street" | "plz" | "city" | "personnel_number";
+type UserField = "first_name" | "last_name" | "username" | "email" | "street" | "plz" | "city" | "personnel_number" | "personio_number";
 
 @Component({
   selector: 'app-sidebar-info',
@@ -19,6 +19,10 @@ export class SidebarInfoComponent {
     }else {
       return false;
     }
+  }
+
+  public get personioLink() {
+    return `https://ferdinand-schultz-nachfolger.personio.de/staff/details/${this.getField("personio_number")}`;
   }
 
   public close() {
