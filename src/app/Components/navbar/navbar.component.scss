@@ -1,6 +1,9 @@
 .navbar {
     width: 100%;
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     top: 0;
     left: 0;
     padding: 15px 50px;
@@ -10,7 +13,18 @@
         height: 35px;
         display: block;
         // object-fit: contain;
-        margin-left: auto;
+        // margin-left: auto;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    .open-db-config {
+        width: 35px;
+        height: 35px;
+        display: block;
+        // object-fit: contain;
+        // margin-left: right;
         border: none;
         background-color: transparent;
         cursor: pointer;

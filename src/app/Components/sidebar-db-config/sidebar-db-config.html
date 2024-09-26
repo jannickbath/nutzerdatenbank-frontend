@@ -1,0 +1,56 @@
+<div class="sidebar-db-config" [class.active]="this.active">
+    <h3>Datenbank bearbeiten</h3>
+    
+    <label for="db-select">Tabelle auswählen:</label>
+    <select class="db-select" id="db-select" name="db_select">
+        <option value="user">Nutzer</option>
+    </select>
+    
+    
+    <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame">
+        <!-- <div class="user form-grid">
+            <div class="firstname">
+                <label for="firstname">Vorname:</label>
+                <input type="text" id="firstname" name="first_name">
+            </div>
+            <div class="lastname">
+                <label for="lastname">Nachname:</label>
+                <input type="text" id="lastname" name="last_name">
+            </div>
+            <div class="username">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="email">
+                <label for="email">E-Mail-Adresse:</label>
+                <input type="text" id="email"  name="email">
+            </div>
+        </div>
+        <div class="location form-grid">
+            <div class="street w-full">
+                <label for="street">Straße und Hausnummer:</label>
+                <input type="text" id="street" name="street">
+            </div>
+            <div class="plz">
+                <label for="plz">PLZ:</label>
+                <input type="text" id="plz" name="plz">
+            </div>
+            <div class="city">
+                <label for="city">Stadt:</label>
+                <input type="text" id="city" name="city">
+            </div>
+        </div>
+        <div class="other form-grid">
+            <div class="personnel_number">
+                <label for="personnel_number">Personalnummer:</label>
+                <input type="text" id="personnel_number" name="personnel_number">
+            </div>
+        </div> -->
+        <button type="submit">Änderungen übernehmen</button>
+    </form>
+    <!-- Prevent browser from redirecting to api endpoint -->
+    <iframe name="submit-frame" id="submit-frame" style="display: none;"></iframe>
+    <button class="close" (click)="close()">
+        <img src="/close.png" alt="">
+    </button>
+</div>

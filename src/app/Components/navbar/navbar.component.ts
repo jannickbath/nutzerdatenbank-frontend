@@ -14,4 +14,8 @@ export class NavbarComponent {
   public openSidebar() {
     this.sidebarService.active = true;
   }
+
+  public openDbConfig() {
+    this.sidebarService.dbConfigSidebarActive = true;
+  }
 }

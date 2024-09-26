@@ -5,9 +5,12 @@ import { ApiUserDetailResponse, ApiUserResponse, MergedUserAdress, User } from '
   providedIn: 'root'
 })
 export class SidebarService {
+  // If true -> add user page opens up
   public active = false;
-  public userDetails: Array<MergedUserAdress> = [];
+  // If a number -> update user sidebar opens up
   public activeDetailsUserId: number | null = null;
+  public userDetails: Array<MergedUserAdress> = [];
+  public dbConfigSidebarActive: boolean = false;
 
   public updateUserDetails(userId: number) {
     const url = `http://nutzerdatenbank-backend.loc/users?id=${userId}`;
