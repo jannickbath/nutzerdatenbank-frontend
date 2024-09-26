@@ -27,6 +27,19 @@ export type ApiUserDetailResponse = {
     users: Array<MergedUserAdress>
 }
 
+export type ApiTableResponse = {
+    tables: Array<string>
+};
+
+export type ApiColumnResponse = {
+    columns: Array<DbColumns>;
+};
+
+export type DbColumns = {
+    name: string;
+    type: string;
+}
+
 export type SearchCategory = {
     name: string;
     value: string;

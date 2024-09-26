@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarService } from '../../Services/sidebar.service';
+import { ApiService } from '../../Services/api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { SidebarService } from '../../Services/sidebar.service';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  constructor (private sidebarService: SidebarService) { }
+  constructor (private sidebarService: SidebarService, private apiService: ApiService) { }
 
   public openSidebar() {
     this.sidebarService.active = true;
@@ -17,5 +18,6 @@ export class NavbarComponent {
 
   public openDbConfig() {
     this.sidebarService.dbConfigSidebarActive = true;
+    this.apiService.fetchTables();
   }
 }

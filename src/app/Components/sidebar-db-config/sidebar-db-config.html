@@ -2,12 +2,25 @@
     <h3>Datenbank bearbeiten</h3>
     
     <label for="db-select">Tabelle auswählen:</label>
-    <select class="db-select" id="db-select" name="db_select">
-        <option value="user">Nutzer</option>
+    <select class="db-select" id="db-select" name="db_select" (change)="handleSelect($event)">
+        <option [value]="tableName" *ngFor="let tableName of tables">{{tableName}}</option>
     </select>
     
     
     <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame">
+        <ul class="columns">
+            <li class="column" *ngFor="let name of columnNames">
+                <p>{{name}}</p>
+                <!-- Ignore Typescript Type Checking for dynamic property -->
+                <p>{{$any(columns)[name]}}</p>
+                <span class="delete">X</span>
+           </li>
+           <li class="column add-column">
+               Neue Spalte hinzufügen
+               <span class="add">X</span>
+           </li>
+        </ul>
+        
         <!-- <div class="user form-grid">
             <div class="firstname">
                 <label for="firstname">Vorname:</label>

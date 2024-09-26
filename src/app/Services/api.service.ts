@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ApiUserResponse, SearchCategory, User } from '../Types';
+import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, DbColumns, SearchCategory, User } from '../Types';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   public users: Array<User> = [];
+  public tables: Array<string> = [];
+  public columns: Array<DbColumns> = [];
   public search: string = "";
   public searchCategories: Array<SearchCategory> = [
     {
@@ -43,6 +45,26 @@ export class ApiService {
         }else {
           this.users = json.users;
         }
+      });
+  }
+
+  public fetchTables() {
+    const url = `http://nutzerdatenbank-backend.loc/db/tables`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then((json: ApiTableResponse) => {
+        this.tables = json.tables;
+      });
+  }
+
+  public fetchColumns(tableName: string) {
+    const url = `http://nutzerdatenbank-backend.loc/db/columns?tableName=${tableName}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then((json: ApiColumnResponse) => {
+        this.columns = json.columns;
       });
   }
 
