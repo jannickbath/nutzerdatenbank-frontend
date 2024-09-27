@@ -68,17 +68,25 @@ export class SidebarInfoComponent {
   }
 
   public getLabel(fieldName: string) {
+    let label: string = fieldName;
+
     // @ts-ignore
-    if (this._inputLabels[fieldName][0]) {
-       // @ts-ignore
-      return this._inputLabels[fieldName][0];
+    if (this._inputLabels[fieldName]) {
+      //  @ts-ignore
+      label = this._inputLabels[fieldName][0];
     }
-    return fieldName;
+
+    return label;
   }
 
   public getGridSpanClass(fieldName: string): string {
+    let gridSpan: number = 2;
+
     // @ts-ignore
-    const gridSpan: number = this._inputLabels[fieldName][1] ?? 2;
+    if (this._inputLabels[fieldName]) {
+      // @ts-ignore
+      gridSpan = this._inputLabels[fieldName][1];
+    }
     return "w-" + gridSpan;
   }
 
