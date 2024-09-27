@@ -14,6 +14,7 @@ export class NavbarComponent {
 
   public openSidebar() {
     this.sidebarService.active = true;
+    this.apiService.fetchColumns(["user", "adress"]);
   }
 
   public openDbConfig() {

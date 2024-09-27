@@ -11,16 +11,42 @@ import { CommonModule } from '@angular/common';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  // labelname, grid-span
+  private _inputLabels = {
+    first_name: ["Vorname", 2],
+    last_name: ["Nachname", 2],
+    email: ["E-Mail", 2],
+    description: ["Job-Beschreibung (Position)", 2],
+    password: ["Passwort", 2],
+    username: ["Nutzername", 2],
+    personnel_number: ["Personalnummer", 2],
+    personio_number: ["Personio-Nummer", 2],
+    plz: ["PLZ", 2],
+    street: ["Straße und Hausnummer", 4],
+    city: ["Ort", 2]
+  }
+
   get active() {
     return this.sideBarService.active;
   }
 
-  public close() {
-    this.sideBarService.active = false;
+  public getLabel(fieldName: string) {
+    // @ts-ignore
+    if (this._inputLabels[fieldName][0]) {
+       // @ts-ignore
+      return this._inputLabels[fieldName][0];
+    }
+    return fieldName;
   }
 
-  public open() {
-    this.sideBarService.active = true;
+  public getGridSpanClass(fieldName: string): string {
+    // @ts-ignore
+    const gridSpan: number = this._inputLabels[fieldName][1] ?? 2;
+    return "w-" + gridSpan;
+  }
+
+  public close() {
+    this.sideBarService.active = false;
   }
 
   public handleSubmit() {
@@ -33,7 +59,5 @@ export class SidebarComponent {
     return this.apiService.iterableColumns;
   }
 
-  constructor (public sideBarService: SidebarService, public apiService: ApiService) {
-    apiService.fetchColumns(["user", "adress"]);
-  }
+  constructor (public sideBarService: SidebarService, public apiService: ApiService) { }
 }

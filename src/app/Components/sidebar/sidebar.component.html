@@ -2,8 +2,8 @@
     <h3>Neuen Nutzer anlegen</h3>
     <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame" (submit)="handleSubmit()">
         <div class="form-grid">
-            <div [ngClass]="colName" *ngFor="let colName of iterableColumns">
-                <label [htmlFor]="colName">{{colName}}:</label>
+            <div [ngClass]="colName + ' ' + getGridSpanClass(colName)" class="column" *ngFor="let colName of iterableColumns">
+                <label [htmlFor]="colName">{{getLabel(colName)}}:</label>
                 <input type="text" [id]="colName" [name]="colName">
             </div>
         </div>
