@@ -64,6 +64,7 @@ export class SearchComponent {
   // Show user details in sidebar
   public handleUserClick(userId: number) {
     this.sideBarService.updateUserDetails(userId);
+    this.apiService.fetchColumns(["user", "adress"]);    
     this.sideBarService.activeDetailsUserId = userId;
   }
 }

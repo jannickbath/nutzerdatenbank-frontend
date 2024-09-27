@@ -16,10 +16,10 @@
     </div>
     <ul class="results">
         <li *ngFor="let user of this.users" [class.active]="activeUserId == user.id" class="user" (click)="handleUserClick(user.id)">
-            <span>Vorname: {{ user.first_name }}</span>
-            <span>Nachname: {{ user.last_name }}</span>
-            <span>Benutzername: {{ user.username }}</span>
-            <span>E-Mail: {{ user.email }}</span>
+            <span><strong>Vorname:</strong> {{ user.first_name }}</span>
+            <span><strong>Nachname:</strong> {{ user.last_name }}</span>
+            <span><strong>Benutzername:</strong> {{ user.username }}</span>
+            <span><strong>E-Mail:</strong> {{ user.email }}</span>
         </li>
     </ul>
     <button class="load-more" (click)="loadMore()">Mehr laden...</button>

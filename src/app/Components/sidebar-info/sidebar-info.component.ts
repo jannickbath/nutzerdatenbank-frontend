@@ -13,6 +13,20 @@ type UserField = "first_name" | "last_name" | "username" | "email" | "street" | 
   styleUrl: './sidebar-info.component.scss'
 })
 export class SidebarInfoComponent {
+  private _inputLabels = {
+    first_name: ["Vorname", 2],
+    last_name: ["Nachname", 2],
+    email: ["E-Mail", 2],
+    description: ["Job-Beschreibung (Position)", 2],
+    password: ["Passwort", 2],
+    username: ["Nutzername", 2],
+    personnel_number: ["Personalnummer", 2],
+    personio_number: ["Personio-Nummer", 2],
+    plz: ["PLZ", 2],
+    street: ["Straße und Hausnummer", 4],
+    city: ["Ort", 2]
+  }
+
   public get active (): boolean {
     if (this.sideBarService.userDetails.length > 0) {
       return true;
@@ -26,8 +40,12 @@ export class SidebarInfoComponent {
     ("personio_number")}`;
   }
 
+  public get iterableColumns() {
+    return this.apiService.iterableColumns;
+  }
+
   public get personio_number() {
-    return this.getField("personio_number") as string;
+    return this.getField("personio_number") as string ?? "";
   }
 
   public close() {
@@ -48,6 +66,26 @@ export class SidebarInfoComponent {
       this.apiService.fetchUsers();
     }, 1000);
   }
+
+  public getLabel(fieldName: string) {
+    // @ts-ignore
+    if (this._inputLabels[fieldName][0]) {
+       // @ts-ignore
+      return this._inputLabels[fieldName][0];
+    }
+    return fieldName;
+  }
+
+  public getGridSpanClass(fieldName: string): string {
+    // @ts-ignore
+    const gridSpan: number = this._inputLabels[fieldName][1] ?? 2;
+    return "w-" + gridSpan;
+  }
+
+  // public getColumnValue(fieldName: string): string {
+  //   // @ts-ignore
+  //   return this.sideBarService.userDetails[0][fieldName] ?? "";
+  // }
 
   constructor (public sideBarService: SidebarService, private apiService: ApiService) { }
 }

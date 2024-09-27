@@ -104,6 +104,22 @@
       grid-column: span 3 !important;
   }
 
+  .w-4 {
+    grid-column: span 4;
+  }
+
+  .w-3 {
+      grid-column: span 3;
+  }
+
+  .w-2 {
+      grid-column: span 2;
+  }
+
+  .w-1 {
+      grid-column: span 1;
+  }
+
   input,
   label {
       display: block;
