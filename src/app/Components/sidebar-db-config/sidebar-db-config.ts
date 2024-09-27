@@ -36,6 +36,6 @@ export class SidebarDbConfigComponent {
   public handleSelect(event: Event) {
     // Get the selected value
     const tableName = (event.target as HTMLSelectElement).value;
-    this.apiService.fetchColumns(tableName);
+    this.apiService.fetchColumns([tableName]);
   }
 }

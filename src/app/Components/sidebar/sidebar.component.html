@@ -1,46 +1,10 @@
 <div class="sidebar" [class.active]="this.active">
     <h3>Neuen Nutzer anlegen</h3>
     <form action="http://nutzerdatenbank-backend.loc/users" method="post" target="submit-frame" (submit)="handleSubmit()">
-        <div class="user form-grid">
-            <div class="firstname">
-                <label for="firstname">Vorname:</label>
-                <input type="text" id="firstname" name="first_name">
-            </div>
-            <div class="lastname">
-                <label for="lastname">Nachname:</label>
-                <input type="text" id="lastname" name="last_name">
-            </div>
-            <div class="username">
-                <label for="username">Benutzername:</label>
-                <input type="text" id="username" name="username">
-            </div>
-            <div class="email">
-                <label for="email">E-Mail-Adresse:</label>
-                <input type="text" id="email"  name="email">
-            </div>
-        </div>
-        <div class="location form-grid">
-            <div class="street w-full">
-                <label for="street">Straße und Hausnummer:</label>
-                <input type="text" id="street" name="street">
-            </div>
-            <div class="plz">
-                <label for="plz">PLZ:</label>
-                <input type="text" id="plz" name="plz">
-            </div>
-            <div class="city">
-                <label for="city">Stadt:</label>
-                <input type="text" id="city" name="city">
-            </div>
-        </div>
-        <div class="other form-grid">
-            <div class="personnel_number">
-                <label for="personnel_number">Personalnummer:</label>
-                <input type="text" id="personnel_number" name="personnel_number">
-            </div>
-            <div class="personio_number">
-                <label for="personio_number">Personionummer:</label>
-                <input type="text" id="personio_number" name="personio_number">
+        <div class="form-grid">
+            <div [ngClass]="colName" *ngFor="let colName of iterableColumns">
+                <label [htmlFor]="colName">{{colName}}:</label>
+                <input type="text" [id]="colName" [name]="colName">
             </div>
         </div>
         <button type="submit">Benutzer anlegen</button>

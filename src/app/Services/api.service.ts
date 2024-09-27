@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, DbColumns, SearchCategory, User } from '../Types';
+import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, SearchCategory, User } from '../Types';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,8 @@ import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, DbColumns, Search
 export class ApiService {
   public users: Array<User> = [];
   public tables: Array<string> = [];
-  public columns: Array<DbColumns> = [];
+  public columns: any = [];
+  private tmpColumns: any = [];
   public search: string = "";
   public searchCategories: Array<SearchCategory> = [
     {
@@ -26,6 +27,10 @@ export class ApiService {
       active: false
     }
   ];
+
+  public get iterableColumns() {
+    return this.cleanupColumns(this.tmpColumns);
+  }
 
   public fetchUsers(limit: number = 4, offset: number = 0): void {
     const baseUrl = `http://nutzerdatenbank-backend.loc/users?limit=${limit}&offset=${offset}`;
@@ -58,14 +63,37 @@ export class ApiService {
       });
   }
 
-  public fetchColumns(tableName: string) {
-    const url = `http://nutzerdatenbank-backend.loc/db/columns?tableName=${tableName}`;
+  public fetchColumns(tableNames: Array<string>) {
+    this.tmpColumns = [];
+    
+    tableNames.forEach((tableName, key) => {
+      const url = `http://nutzerdatenbank-backend.loc/db/columns?tableName=${tableName}`;
 
-    fetch(url)
-      .then(res => res.json())
-      .then((json: ApiColumnResponse) => {
-        this.columns = json.columns;
-      });
+      // Set a timeout to make sure that columns are fetched in the right order
+      setTimeout(() => {
+        fetch(url)
+          .then(res => res.json())
+          .then((json: ApiColumnResponse) => {
+            this.columns = json.columns;
+            this.tmpColumns = [...this.tmpColumns, Object.keys(json.columns)];
+          });
+      }, key * 100);
+    })
+  }
+
+  public cleanupColumns(columns: Array<Array<string>>): Array<string> {
+    const strippedColumns = ["id", "adress_id"];
+    let newArr: Array<string> = [];
+
+    columns.forEach(arr => {
+      arr.forEach(col => {
+        if (!strippedColumns.includes(col)) {
+          newArr.push(col);
+        }
+      })
+    })
+
+    return newArr;
   }
 
   constructor() { }

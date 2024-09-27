@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { SidebarService } from '../../Services/sidebar.service';
+import { ApiService } from '../../Services/api.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
@@ -27,5 +29,11 @@ export class SidebarComponent {
     this.close();
   }
 
-  constructor (public sideBarService: SidebarService) { }
+  public get iterableColumns() {
+    return this.apiService.iterableColumns;
+  }
+
+  constructor (public sideBarService: SidebarService, public apiService: ApiService) {
+    apiService.fetchColumns(["user", "adress"]);
+  }
 }

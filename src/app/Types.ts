@@ -32,13 +32,8 @@ export type ApiTableResponse = {
 };
 
 export type ApiColumnResponse = {
-    columns: Array<DbColumns>;
+    columns: Object;
 };
-
-export type DbColumns = {
-    name: string;
-    type: string;
-}
 
 export type SearchCategory = {
     name: string;
