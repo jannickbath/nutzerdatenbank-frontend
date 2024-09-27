@@ -45,7 +45,7 @@
         </div>
         <input type="text" id="id" name="id" [value]="sideBarService.activeDetailsUserId" class="hidden" hidden>
         <div class="portal-verknuepfungen">
-            <a target="_blank" rel="noopener noreferrer" [href]="personioLink" class="personio" title="Personio-Profil aufrufen">
+            <a target="_blank" rel="noopener noreferrer" [href]="personioLink" class="personio" [class.disabled]="this.personio_number.length < 8" title="Personio-Profil aufrufen">
                 <img src="/personio.png" alt="">
             </a>
             <a href="#" class="miradore disabled" title="Mit Miradore verbinden">

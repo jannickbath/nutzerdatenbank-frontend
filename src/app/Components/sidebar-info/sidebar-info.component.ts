@@ -22,7 +22,12 @@ export class SidebarInfoComponent {
   }
 
   public get personioLink() {
-    return `https://ferdinand-schultz-nachfolger.personio.de/staff/details/${this.getField("personio_number")}`;
+    return `https://ferdinand-schultz-nachfolger.personio.de/staff/details/${this.getField
+    ("personio_number")}`;
+  }
+
+  public get personio_number() {
+    return this.getField("personio_number") as string;
   }
 
   public close() {
