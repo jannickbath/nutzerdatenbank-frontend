@@ -50,17 +50,21 @@ export class SidebarDbConfigComponent {
     
       setTimeout(() => {
         this.apiService.fetchColumns([this.activeTableName]);
-      }, 200);
+      }, 50);
   }
 
-  public handleDeleteColumn() {
-    const url = `http://nutzerdatenbank-backend.loc/db/delete-column?columnName=${this.addColumnName}&tableName=${this.activeTableName}`;
+  public handleDeleteColumn(columnName: string) {
+    const url = `http://nutzerdatenbank-backend.loc/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
     
     fetch(url)
       .then(res => res.json())
       .then((json) => {
         console.log(json);
       });
+
+    setTimeout(() => {
+      this.apiService.fetchColumns([this.activeTableName]);
+    }, 50);
   }
 
   public handleSelect(event: Event) {

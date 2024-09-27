@@ -13,7 +13,7 @@
                 <p>{{name}}</p>
                 <!-- Ignore Typescript Type Checking for dynamic property -->
                 <p>{{$any(columns)[name]}}</p>
-                <span class="delete">X</span>
+                <span class="delete" (click)="handleDeleteColumn(name)">X</span>
            </li>
            <li class="column add-column" (click)="addColumn = true" *ngIf="this.activeTableName">
                Neue Spalte hinzufügen
