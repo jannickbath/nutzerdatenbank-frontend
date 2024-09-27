@@ -15,10 +15,19 @@
                 <p>{{$any(columns)[name]}}</p>
                 <span class="delete">X</span>
            </li>
-           <li class="column add-column">
+           <li class="column add-column" (click)="addColumn = true" *ngIf="this.activeTableName">
                Neue Spalte hinzufügen
-               <span class="add">X</span>
+               <span class="add">→</span>
            </li>
+           <li class="column name-column" [class.active]="addColumn">
+                <input type="text" placeholder="Name" [(ngModel)]="addColumnName" [ngModelOptions]="{standalone: true}">
+           </li>
+            <li class="column confirm-column" [class.active]="addColumn">
+                <input type="text" placeholder="Type" [(ngModel)]="addColumnType" [ngModelOptions]="{standalone: true}">
+                <span class="confirm" (click)="handleAddColumn()">
+                    <img src="/confirm.png" alt="">
+                </span>
+            </li>
         </ul>
         <button type="submit">Änderungen übernehmen</button>
     </form>

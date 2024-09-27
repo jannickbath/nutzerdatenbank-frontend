@@ -83,6 +83,18 @@
             cursor: pointer;
         }
 
+        .confirm {
+            width: 25px;
+            height: 100%;
+            display: grid;
+            place-content: center;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            background-color: green;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
         &:hover {
             .delete {
                 max-width: 45px;
@@ -98,6 +110,16 @@
             grid-column: span 2;
             margin-top: 15px;
             cursor: pointer;
+        }
+
+        &.name-column,
+        &.confirm-column {
+            display: none;
+            height: 34px;
+
+            &.active {
+                display: flex;
+            }
         }
     }
 }
