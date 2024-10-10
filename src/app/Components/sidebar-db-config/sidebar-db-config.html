@@ -13,7 +13,9 @@
                 <p>{{name}}</p>
                 <!-- Ignore Typescript Type Checking for dynamic property -->
                 <p>{{$any(columns)[name]}}</p>
-                <span class="delete" (click)="handleDeleteColumn(name)">X</span>
+                <span class="delete" (click)="handleDeleteColumn(name)">
+                    <img src="/delete.png" alt="">
+                </span>
            </li>
            <li class="column add-column" (click)="addColumn = true" *ngIf="this.activeTableName">
                Neue Spalte hinzufügen
@@ -29,7 +31,7 @@
                 </span>
             </li>
         </ul>
-        <button type="submit">Änderungen übernehmen</button>
+        <button type="submit" class="disabled" disabled>Änderungen übernehmen</button>
     </form>
     <!-- Prevent browser from redirecting to api endpoint -->
     <iframe name="submit-frame" id="submit-frame" style="display: none;"></iframe>

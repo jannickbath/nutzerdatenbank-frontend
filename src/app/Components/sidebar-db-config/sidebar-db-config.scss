@@ -64,6 +64,11 @@
             background-color: red;
             transition: max-width 200ms ease-out;
             cursor: pointer;
+
+            img {
+                width: 80%;
+                margin: auto;
+            }
         }
 
         .add {
