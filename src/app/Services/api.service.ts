@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   public fetchUsers(limit: number = 4, offset: number = 0): void {
-    const baseUrl = `http://nutzerdatenbank-backend.loc/users?limit=${limit}&offset=${offset}`;
+    const baseUrl = `http://nutzerdatenbank-backend.loc/api/users?limit=${limit}&offset=${offset}`;
     let url = this.search ? (baseUrl + "&search=" + this.search) : baseUrl;
     const activeFields = this.searchCategories.filter(field => field.active);
 
@@ -54,7 +54,7 @@ export class ApiService {
   }
 
   public fetchTables() {
-    const url = `http://nutzerdatenbank-backend.loc/db/tables`;
+    const url = `http://nutzerdatenbank-backend.loc/api/db/tables`;
 
     fetch(url)
       .then(res => res.json())
@@ -67,7 +67,7 @@ export class ApiService {
     this.tmpColumns = [];
     
     tableNames.forEach((tableName, key) => {
-      const url = `http://nutzerdatenbank-backend.loc/db/columns?tableName=${tableName}`;
+      const url = `http://nutzerdatenbank-backend.loc/api/db/columns?tableName=${tableName}`;
 
       // Set a timeout to make sure that columns are fetched in the right order
       setTimeout(() => {

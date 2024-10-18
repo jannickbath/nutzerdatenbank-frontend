@@ -13,7 +13,7 @@ export class SidebarService {
   public dbConfigSidebarActive: boolean = false;
 
   public updateUserDetails(userId: number) {
-    const url = `http://nutzerdatenbank-backend.loc/users?id=${userId}`;
+    const url = `http://nutzerdatenbank-backend.loc/api/users?id=${userId}`;
 
     fetch(url)
       .then(res => res.json())

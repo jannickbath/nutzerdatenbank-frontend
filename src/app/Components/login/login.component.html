@@ -1,0 +1,19 @@
+<form action="" class="login">
+    <div class="username">
+        <label for="username">Benutzername:</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="password">
+        <label for="password">Passwort:</label>
+        <input type="text" type="password" id="password" name="password">
+    </div>
+    <button class="submit">Absenden</button>
+</form>
+
+<div class="wrapper" *ngIf="loggedIn">
+    <app-navbar></app-navbar>
+    <app-sidebar></app-sidebar>
+    <app-sidebar-info></app-sidebar-info>
+    <app-sidebar-db-config></app-sidebar-db-config>
+    <app-search></app-search>
+</div>

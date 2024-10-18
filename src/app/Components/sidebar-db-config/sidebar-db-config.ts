@@ -40,7 +40,7 @@ export class SidebarDbConfigComponent {
   }
 
   public handleAddColumn() {
-    const url = `http://nutzerdatenbank-backend.loc/db/add-column?columnName=${this.addColumnName}&columnType=${this.addColumnType}&tableName=${this.activeTableName}`;
+    const url = `http://nutzerdatenbank-backend.loc/api/db/add-column?columnName=${this.addColumnName}&columnType=${this.addColumnType}&tableName=${this.activeTableName}`;
     
     fetch(url)
       .then(res => res.json())
@@ -54,7 +54,7 @@ export class SidebarDbConfigComponent {
   }
 
   public handleDeleteColumn(columnName: string) {
-    const url = `http://nutzerdatenbank-backend.loc/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
+    const url = `http://nutzerdatenbank-backend.loc/api/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
     
     fetch(url)
       .then(res => res.json())

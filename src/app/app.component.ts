@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { SearchComponent } from './Components/search/search.component';
-import { NavbarComponent } from './Components/navbar/navbar.component';
-import { SidebarComponent } from './Components/sidebar/sidebar.component';
-import { SidebarInfoComponent } from "./Components/sidebar-info/sidebar-info.component";
-import { SidebarDbConfigComponent } from "./Components/sidebar-db-config/sidebar-db-config";
+import { LoginComponent } from "./Components/login/login.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SearchComponent, NavbarComponent, SidebarComponent, SidebarInfoComponent, SidebarDbConfigComponent],
+  imports: [LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
