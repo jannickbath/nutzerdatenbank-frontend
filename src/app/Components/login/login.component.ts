@@ -5,6 +5,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { SidebarInfoComponent } from '../sidebar-info/sidebar-info.component';
 import { SidebarDbConfigComponent } from '../sidebar-db-config/sidebar-db-config';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../Services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  protected loggedIn: boolean = false;
+  protected token = localStorage.getItem("Authorization") ?? "";
+  protected tokenAvailable: boolean = this.token.length > 0;
+  protected tokenValid: boolean = false;
 
   public onSubmit() {
     localStorage.setItem('token', "myTokenBlah");
+  }
+
+  constructor(public apiService: ApiService) {
+    if (this.tokenAvailable) {
+      apiService.validateToken(valid => this.tokenValid = valid)
+    }
   }
 }

@@ -27,6 +27,7 @@ export class ApiService {
       active: false
     }
   ];
+  private token = localStorage.getItem("Authorization") ?? "";
 
   public get iterableColumns() {
     return this.cleanupColumns(this.tmpColumns);
@@ -42,7 +43,11 @@ export class ApiService {
       url += activeFields.map(field => field.value).join(",");
     }
 
-    fetch(url)
+    fetch(url, {
+      headers: {
+        "Authorization": this.token
+      }
+    })
       .then(res => res.json())
       .then((json: ApiUserResponse) => {
         if (offset > 0) {
@@ -71,7 +76,9 @@ export class ApiService {
 
       // Set a timeout to make sure that columns are fetched in the right order
       setTimeout(() => {
-        fetch(url)
+        fetch(url, {
+          headers: {Authorization: sessionStorage.getItem('token') ?? ""}
+        })
           .then(res => res.json())
           .then((json: ApiColumnResponse) => {
             this.columns = json.columns;
@@ -94,6 +101,29 @@ export class ApiService {
     })
 
     return newArr;
+  }
+
+  private authorize() {
+    fetch("http://nutzerdatenbank-backend.loc/login", {
+      method: "POST",
+      headers: {},
+      body: JSON.stringify({username: "testuser", password: "testpassword"})
+    }).then(res => res.json())
+      .then(json => {
+        localStorage.setItem('Authorization', 'Bearer ' + json.token);
+      })
+  }
+
+  public validateToken(cb: (valid: boolean) => void): void {
+    fetch("http://nutzerdatenbank-backend.loc/api/validateToken", {
+      method: "POST",
+      headers: {
+        "Authorization": this.token
+      }
+    }).then(res => res.json())
+      .then(json => {
+        cb(json.code === 200);
+      })
   }
 
   constructor() { }

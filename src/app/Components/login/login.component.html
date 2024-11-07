@@ -1,4 +1,4 @@
-<form action="" class="login">
+<form action="" class="login" *ngIf="!tokenValid">
     <div class="username">
         <label for="username">Benutzername:</label>
         <input type="text" id="username" name="username">
@@ -10,7 +10,7 @@
     <button class="submit">Absenden</button>
 </form>
 
-<div class="wrapper" *ngIf="loggedIn">
+<div class="wrapper" *ngIf="tokenValid">
     <app-navbar></app-navbar>
     <app-sidebar></app-sidebar>
     <app-sidebar-info></app-sidebar-info>
