@@ -1,13 +1,13 @@
 <form action="" class="login" *ngIf="!tokenValid">
     <div class="username">
         <label for="username">Benutzername:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" [(ngModel)]="username">
     </div>
     <div class="password">
         <label for="password">Passwort:</label>
-        <input type="text" type="password" id="password" name="password">
+        <input type="text" type="password" id="password" name="password" [(ngModel)]="password">
     </div>
-    <button class="submit">Absenden</button>
+    <button class="submit" type="button" (click)="handleSubmit()">Absenden</button>
 </form>
 
 <div class="wrapper" *ngIf="tokenValid">

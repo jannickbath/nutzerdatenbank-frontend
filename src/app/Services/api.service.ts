@@ -61,7 +61,11 @@ export class ApiService {
   public fetchTables() {
     const url = `http://nutzerdatenbank-backend.loc/api/db/tables`;
 
-    fetch(url)
+    fetch(url, {
+      headers: {
+        "Authorization": this.token
+      }
+    })
       .then(res => res.json())
       .then((json: ApiTableResponse) => {
         this.tables = json.tables;
@@ -77,7 +81,9 @@ export class ApiService {
       // Set a timeout to make sure that columns are fetched in the right order
       setTimeout(() => {
         fetch(url, {
-          headers: {Authorization: sessionStorage.getItem('token') ?? ""}
+          headers: {
+            "Authorization": this.token
+          }
         })
           .then(res => res.json())
           .then((json: ApiColumnResponse) => {
@@ -103,14 +109,23 @@ export class ApiService {
     return newArr;
   }
 
-  private authorize() {
+  public authorize(username: string, password: string, cb: (token: boolean) => void): void {
     fetch("http://nutzerdatenbank-backend.loc/login", {
       method: "POST",
-      headers: {},
-      body: JSON.stringify({username: "testuser", password: "testpassword"})
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({username: username, password: password})
     }).then(res => res.json())
       .then(json => {
-        localStorage.setItem('Authorization', 'Bearer ' + json.token);
+        // Token valid
+        if ((json?.token ?? "").length > 0) {
+          this.token = "Bearer " + json.token;
+          localStorage.setItem('Authorization', this.token);
+          cb(true);
+        }else {
+          cb(false);
+        }
       })
   }
 
