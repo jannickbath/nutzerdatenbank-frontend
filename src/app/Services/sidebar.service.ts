@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiUserDetailResponse, ApiUserResponse, MergedUserAdress, User } from '../Types';
+import { ApiUserDetailResponse, MergedUserAdress } from '../Types';
 
 @Injectable({
   providedIn: 'root'

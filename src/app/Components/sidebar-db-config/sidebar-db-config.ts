@@ -18,6 +18,7 @@ export class SidebarDbConfigComponent {
   public addColumnName: string = "";
   public addColumnType: string = "";
   public activeTableName: string = "";
+  private token = localStorage.getItem("Authorization") ?? "";
 
   public get active() {
     return this.sidebarService.dbConfigSidebarActive;
@@ -42,7 +43,11 @@ export class SidebarDbConfigComponent {
   public handleAddColumn() {
     const url = `http://nutzerdatenbank-backend.loc/api/db/add-column?columnName=${this.addColumnName}&columnType=${this.addColumnType}&tableName=${this.activeTableName}`;
     
-    fetch(url)
+    fetch(url, {
+      headers: {
+        "Authorization": this.token
+      }
+    })
       .then(res => res.json())
       .then((json) => {
         console.log(json);
@@ -56,7 +61,11 @@ export class SidebarDbConfigComponent {
   public handleDeleteColumn(columnName: string) {
     const url = `http://nutzerdatenbank-backend.loc/api/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
     
-    fetch(url)
+    fetch(url,{
+      headers: {
+        "Authorization": this.token
+      }
+    })
       .then(res => res.json())
       .then((json) => {
         console.log(json);
