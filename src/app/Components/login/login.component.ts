@@ -19,6 +19,7 @@ export class LoginComponent {
   protected token = localStorage.getItem("Authorization") ?? "";
   protected tokenAvailable: boolean = this.token.length > 0;
   protected tokenValid: boolean = false;
+  protected loginError: boolean = false;
   protected username: string = "";
   protected password: string = "";
 
@@ -31,7 +32,10 @@ export class LoginComponent {
       console.error("Please provide a password in order to log in.");
     }
 
-    this.apiService.authorize(this.username, this.password, (valid) => this.tokenValid = valid);
+    this.apiService.authorize(this.username, this.password, (valid) => {
+        this.tokenValid = valid;
+        this.loginError = !valid;
+    });
   }
 
   constructor(public apiService: ApiService) {

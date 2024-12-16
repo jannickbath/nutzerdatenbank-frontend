@@ -8,6 +8,7 @@
         <input type="text" type="password" id="password" name="password" [(ngModel)]="password">
     </div>
     <button class="submit" type="submit" (click)="handleSubmit()">Anmelden</button>
+    <div class="error popup" [class.active]="loginError">Anmeldung fehlgeschlagen</div>
 </form>
 
 <div class="wrapper" *ngIf="tokenValid">
