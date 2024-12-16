@@ -21,4 +21,13 @@ export class NavbarComponent {
     this.sidebarService.dbConfigSidebarActive = true;
     this.apiService.fetchTables();
   }
+
+  public logout() {
+    this.apiService.unauthorize();
+    this._refreshBrowserWindow();
+  }
+
+  private _refreshBrowserWindow() {
+    window.location.reload();
+  }
 }

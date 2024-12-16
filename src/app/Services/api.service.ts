@@ -129,6 +129,10 @@ export class ApiService {
       })
   }
 
+  public unauthorize(): void {
+    localStorage.removeItem("Authorization");
+  }
+
   public validateToken(cb: (valid: boolean) => void): void {
     fetch("http://172.16.17.5:8082/api/validateToken", {
       method: "POST",
