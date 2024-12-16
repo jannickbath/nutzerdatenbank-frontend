@@ -14,7 +14,7 @@ export class SidebarService {
   private token = localStorage.getItem("Authorization") ?? "";
 
   public updateUserDetails(userId: number) {
-    const url = `http://nutzerdatenbank-backend.loc/api/users?id=${userId}`;
+    const url = `http://172.16.17.5:8082/api/users?id=${userId}`;
 
     fetch(url, {
       headers: {

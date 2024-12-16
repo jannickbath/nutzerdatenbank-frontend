@@ -34,7 +34,7 @@ export class ApiService {
   }
 
   public fetchUsers(limit: number = 4, offset: number = 0): void {
-    const baseUrl = `http://nutzerdatenbank-backend.loc/api/users?limit=${limit}&offset=${offset}`;
+    const baseUrl = `http://172.16.17.5:8082/api/users?limit=${limit}&offset=${offset}`;
     let url = this.search ? (baseUrl + "&search=" + this.search) : baseUrl;
     const activeFields = this.searchCategories.filter(field => field.active);
 
@@ -59,7 +59,7 @@ export class ApiService {
   }
 
   public fetchTables() {
-    const url = `http://nutzerdatenbank-backend.loc/api/db/tables`;
+    const url = `http://172.16.17.5:8082/api/db/tables`;
 
     fetch(url, {
       headers: {
@@ -76,7 +76,7 @@ export class ApiService {
     this.tmpColumns = [];
     
     tableNames.forEach((tableName, key) => {
-      const url = `http://nutzerdatenbank-backend.loc/api/db/columns?tableName=${tableName}`;
+      const url = `http://172.16.17.5:8082/api/db/columns?tableName=${tableName}`;
 
       // Set a timeout to make sure that columns are fetched in the right order
       setTimeout(() => {
@@ -110,7 +110,7 @@ export class ApiService {
   }
 
   public authorize(username: string, password: string, cb: (token: boolean) => void): void {
-    fetch("http://nutzerdatenbank-backend.loc/login", {
+    fetch("http://172.16.17.5:8082/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -130,7 +130,7 @@ export class ApiService {
   }
 
   public validateToken(cb: (valid: boolean) => void): void {
-    fetch("http://nutzerdatenbank-backend.loc/api/validateToken", {
+    fetch("http://172.16.17.5:8082/api/validateToken", {
       method: "POST",
       headers: {
         "Authorization": this.token
