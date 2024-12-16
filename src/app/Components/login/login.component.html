@@ -1,4 +1,4 @@
-<form action="" class="login" *ngIf="!tokenValid">
+<form class="login" *ngIf="!tokenValid" (ngSubmit)="handleSubmit()">
     <div class="username">
         <label for="username">Benutzername:</label>
         <input type="text" id="username" name="username" [(ngModel)]="username">
@@ -7,7 +7,7 @@
         <label for="password">Passwort:</label>
         <input type="text" type="password" id="password" name="password" [(ngModel)]="password">
     </div>
-    <button class="submit" type="button" (click)="handleSubmit()">Absenden</button>
+    <button class="submit" type="submit" (click)="handleSubmit()">Anmelden</button>
 </form>
 
 <div class="wrapper" *ngIf="tokenValid">
