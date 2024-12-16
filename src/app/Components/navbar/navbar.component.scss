@@ -7,6 +7,8 @@
     top: 0;
     left: 0;
     padding: 15px 50px;
+    background-color: white;
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
 
     .nav-button {
         width: 35px;
@@ -20,5 +22,9 @@
     .logout {
         margin-left: auto;
         margin-right: 10px;
+    }
+
+    .user {
+        margin-left: auto;
     }
 }

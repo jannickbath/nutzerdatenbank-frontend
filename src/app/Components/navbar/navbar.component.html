@@ -2,6 +2,9 @@
     <button class="open-db-config nav-button" (click)="this.openDbConfig()">
         <img src="/database.png" alt="">
     </button>
+    <div class="user">
+        Angemeldet als: <strong>{{this.loggedInUser}}</strong>
+    </div>
     <button class="logout nav-button" (click)="this.logout()">
         <img src="/logout.png" alt="">
     </button>

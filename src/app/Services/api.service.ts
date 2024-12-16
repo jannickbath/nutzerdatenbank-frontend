@@ -121,6 +121,7 @@ export class ApiService {
         // Token valid
         if ((json?.token ?? "").length > 0) {
           this.token = "Bearer " + json.token;
+          this.loggedInUser = username;
           localStorage.setItem('Authorization', this.token);
           cb(true);
         }else {
@@ -131,6 +132,7 @@ export class ApiService {
 
   public unauthorize(): void {
     localStorage.removeItem("Authorization");
+    localStorage.removeItem("loggedInUser");
   }
 
   public validateToken(cb: (valid: boolean) => void): void {
@@ -143,6 +145,14 @@ export class ApiService {
       .then(json => {
         cb(json.code === 200);
       })
+  }
+
+  public set loggedInUser(username: string) {
+    localStorage.setItem("loggedInUser", username);
+  }
+
+  public get loggedInUser() {
+    return localStorage.getItem("loggedInUser") ?? "";
   }
 
   constructor() { }

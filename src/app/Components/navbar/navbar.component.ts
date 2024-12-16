@@ -30,4 +30,8 @@ export class NavbarComponent {
   private _refreshBrowserWindow() {
     window.location.reload();
   }
+
+  public get loggedInUser() {
+    return this.apiService.loggedInUser;
+  }
 }
