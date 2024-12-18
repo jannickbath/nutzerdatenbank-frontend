@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, SearchCategory, User } from '../Types';
+import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, MicrosoftUserResponse, SearchCategory, User } from '../Types';
+import { UrlSegment } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -35,19 +36,21 @@ export class ApiService {
 
   public fetchUsers(limit: number = 4, offset: number = 0): void {
     const baseUrl = `http://172.16.17.5:8082/api/users?limit=${limit}&offset=${offset}`;
+    const microsoftBaseUrl = `http://172.16.17.5:8082/api/microsoft_users?limit=${limit}`;
     let url = this.search ? (baseUrl + "&search=" + this.search) : baseUrl;
+    let microsoftUrl = this.search ? (microsoftBaseUrl + "&search=" + this.search) : microsoftBaseUrl;
     const activeFields = this.searchCategories.filter(field => field.active);
+
+    const requestHeaders = {
+      "Authorization": this.token
+    }
 
     if (this.search && activeFields.length > 0) {
       url += "&filter=";
       url += activeFields.map(field => field.value).join(",");
     }
 
-    fetch(url, {
-      headers: {
-        "Authorization": this.token
-      }
-    })
+    fetch(url, { headers: requestHeaders })
       .then(res => res.json())
       .then((json: ApiUserResponse) => {
         if (offset > 0) {
@@ -55,6 +58,30 @@ export class ApiService {
         }else {
           this.users = json.users;
         }
+      });
+
+    fetch(microsoftUrl, { headers: requestHeaders })
+      .then(res => res.json())
+      .then((json: MicrosoftUserResponse) => {
+        console.log(json);
+        let locUsers: Array<User> = [];
+    
+        json.value.forEach(user => {
+          locUsers = [...locUsers, {
+            id: user.id,
+            first_name: user.givenName,
+            last_name: user.surname,
+            email: user.mail,
+            description: "",
+            password: "",
+            username: "",
+            adress_id: 0,
+            personnel_number: 0,
+            personio_number: 0
+          }]
+        })
+
+        this.users = [...this.users, ...locUsers];
       });
   }
 
