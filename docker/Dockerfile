@@ -2,7 +2,7 @@ FROM alpine
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-COPY . /project
+# COPY . /project
 WORKDIR /project
 
 RUN apk update
