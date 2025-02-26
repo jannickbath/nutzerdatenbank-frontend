@@ -41,7 +41,7 @@ export class SearchComponent {
 
     this._debounceTimeout = setTimeout(() => {
       this.apiService.fetchUsers();
-    }, 200);
+    }, 1000);
   }
 
   public toggleField(event: Event) {

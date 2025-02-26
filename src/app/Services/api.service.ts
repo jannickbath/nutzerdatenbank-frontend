@@ -36,9 +36,9 @@ export class ApiService {
 
   public fetchUsers(limit: number = 4, offset: number = 0): void {
     const baseUrl = `http://172.16.17.5:8082/api/users?limit=${limit}&offset=${offset}`;
-    const microsoftBaseUrl = `http://172.16.17.5:8082/api/microsoft_users?limit=${limit}`;
+    const microsoftBaseUrl = `http://172.16.17.5:8082/api/merged_users?limit=${limit}&offset=${offset}`;
     let url = this.search ? (baseUrl + "&search=" + this.search) : baseUrl;
-    let microsoftUrl = this.search ? (microsoftBaseUrl + "&search=" + this.search) : microsoftBaseUrl;
+    let microsoftUrl = this.search ? (microsoftBaseUrl + "&search=" + "\"displayName:" + this.search + "\"") : microsoftBaseUrl;
     const activeFields = this.searchCategories.filter(field => field.active);
 
     const requestHeaders = {
@@ -50,15 +50,15 @@ export class ApiService {
       url += activeFields.map(field => field.value).join(",");
     }
 
-    fetch(url, { headers: requestHeaders })
-      .then(res => res.json())
-      .then((json: ApiUserResponse) => {
-        if (offset > 0) {
-          this.users = [...this.users, ...json.users];
-        }else {
-          this.users = json.users;
-        }
-      });
+    // fetch(url, { headers: requestHeaders })
+    //   .then(res => res.json())
+    //   .then((json: ApiUserResponse) => {
+    //     if (offset > 0) {
+    //       this.users = [...this.users, ...json.users];
+    //     }else {
+    //       this.users = json.users;
+    //     }delde
+    //   });
 
     fetch(microsoftUrl, { headers: requestHeaders })
       .then(res => res.json())

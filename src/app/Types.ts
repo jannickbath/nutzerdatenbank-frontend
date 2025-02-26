@@ -24,18 +24,23 @@ export type ApiUserResponse = {
 }
 
 export type MicrosoftUser = {
-    businessPhones: Array<string>;
+    id: string;
     displayName: string;
     givenName: string;
-    jobTitle: string;
+    surname: string;
     mail: string;
+    jobTitle: string;
     mobilePhone: string;
+    businessPhones: Array<string>;
     officeLocation: string;
     preferredLanguage: string;
-    surname: string;
     userPrincipalName: string;
-    id: string;
 }
+
+export type PersonioUser = {}
+export type SnipeITAssets = {}
+
+export type MainUser = MicrosoftUser & PersonioUser & SnipeITAssets;
 
 export type MicrosoftUserResponse = {
     value: Array<MicrosoftUser>
