@@ -7,7 +7,7 @@ WORKDIR /project
 
 RUN apk update
 RUN apk upgrade
-RUN apk add python3
+RUN apk add python3 nodejs npm
 
 RUN npm install
 RUN npm run build --configuration=production 
