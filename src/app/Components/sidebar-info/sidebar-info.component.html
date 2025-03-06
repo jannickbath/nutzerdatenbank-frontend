@@ -1,6 +1,6 @@
 <div class="sidebar-info" [class.active]="this.active">
     <h3>Nutzerdetails</h3>
-    <form action="http://172.16.17.5:8082/users/update" method="post" target="submit-frame" (submit)="handleSubmit()">
+    <form [attr.action]="environment.backendUrl + '/users/update'" method="post" target="submit-frame" (submit)="handleSubmit()">
         <div class="form-grid">
             <div [ngClass]="colName + ' ' + getGridSpanClass(colName)" class="column" *ngFor="let colName of iterableColumns">
                 <label [htmlFor]="colName">{{getLabel(colName)}}:</label>

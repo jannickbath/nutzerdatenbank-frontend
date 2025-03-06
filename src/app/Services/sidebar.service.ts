@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiUserDetailResponse, MergedUserAdress } from '../Types';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ export class SidebarService {
   public userDetails: Array<MergedUserAdress> = [];
   public dbConfigSidebarActive: boolean = false;
   private token = localStorage.getItem("Authorization") ?? "";
+  private environment = environment;
+
 
   public updateUserDetails(userId: number) {
-    const url = `http://172.16.17.5:8082/api/users?id=${userId}`;
+    const url = `${this.environment.backendUrl}/api/users?id=${userId}`;
 
     fetch(url, {
       headers: {

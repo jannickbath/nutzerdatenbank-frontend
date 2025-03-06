@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SidebarService } from '../../Services/sidebar.service';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../Services/api.service';
+import { environment } from '../../../environments/environment';
 
 type UserField = "first_name" | "last_name" | "username" | "email" | "street" | "plz" | "city" | "personnel_number" | "personio_number";
 
@@ -26,6 +27,8 @@ export class SidebarInfoComponent {
     street: ["Straße und Hausnummer", 4],
     city: ["Ort", 2]
   }
+
+  public environment = environment;
 
   public get active (): boolean {
     if (this.sideBarService.userDetails.length > 0) {

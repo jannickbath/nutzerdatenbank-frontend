@@ -3,6 +3,7 @@ import { SidebarService } from '../../Services/sidebar.service';
 import { ApiService } from '../../Services/api.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-sidebar-db-config',
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 export class SidebarDbConfigComponent {
   constructor(public sidebarService: SidebarService, private apiService: ApiService) { }
 
+  public environment = environment;
   public addColumn: boolean = false;
   public addColumnName: string = "";
   public addColumnType: string = "";
@@ -41,7 +43,7 @@ export class SidebarDbConfigComponent {
   }
 
   public handleAddColumn() {
-    const url = `http://172.16.17.5:8082/api/db/add-column?columnName=${this.addColumnName}&columnType=${this.addColumnType}&tableName=${this.activeTableName}`;
+    const url = `${this.environment.backendUrl}/api/db/add-column?columnName=${this.addColumnName}&columnType=${this.addColumnType}&tableName=${this.activeTableName}`;
     
     fetch(url, {
       headers: {
@@ -59,7 +61,7 @@ export class SidebarDbConfigComponent {
   }
 
   public handleDeleteColumn(columnName: string) {
-    const url = `http://172.16.17.5:8082/api/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
+    const url = `${this.environment.backendUrl}/api/db/delete-column?columnName=${columnName}&tableName=${this.activeTableName}`;
     
     fetch(url,{
       headers: {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SidebarService } from '../../Services/sidebar.service';
 import { ApiService } from '../../Services/api.service';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+  public environment = environment;
   // labelname, grid-span
   private _inputLabels = {
     first_name: ["Vorname", 2],
