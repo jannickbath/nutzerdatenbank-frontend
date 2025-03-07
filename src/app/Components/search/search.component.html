@@ -11,15 +11,17 @@
         <ul class="properties">
             <li *ngFor="let field of fields; let i = index" class="property" [class.active]="field.active" (click)="toggleField($event)" [attr.data-index]="i">
                 {{ field.name }}
+                {{ field.active }}
             </li>
         </ul>
     </div>
     <ul class="results">
         <li *ngFor="let user of this.users" [class.active]="activeUserId == user.id" class="user">
-            <span><strong>Vorname:</strong> {{ user.first_name }}</span>
-            <span><strong>Nachname:</strong> {{ user.last_name }}</span>
-            <span><strong>Benutzername:</strong> {{ user.username }}</span>
-            <span><strong>E-Mail:</strong> {{ user.email }}</span>
+            <span *ngIf="user.givenName"><strong>Vorname:</strong> {{ user.givenName }}</span>
+            <span *ngIf="user.surname"><strong>Nachname:</strong> {{ user.surname }}</span>
+            <span *ngIf="user.mail"><strong>E-Mail:</strong> {{ user.mail }}</span>
+            <span *ngIf="user.jobTitle"><strong>Titelbezeichnung:</strong> {{ user.jobTitle }}</span>
+            <span *ngIf="user.mobilePhone"><strong>Mobilnummer:</strong> {{ user.mobilePhone }}</span>
         </li>
     </ul>
     <button class="load-more" (click)="loadMore()">Mehr laden...</button>

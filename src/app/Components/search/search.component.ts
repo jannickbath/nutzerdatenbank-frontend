@@ -58,7 +58,7 @@ export class SearchComponent {
   public loadMore() {
     const itemsToLoad = 2;
     this._offset += itemsToLoad;
-    this.apiService.fetchUsers(itemsToLoad, this._offset);
+    this.apiService.fetchUsers(itemsToLoad, this._offset, true);
   }
 
   // Show user details in sidebar

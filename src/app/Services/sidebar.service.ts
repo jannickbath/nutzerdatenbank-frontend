@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiUserDetailResponse, MergedUserAdress } from '../Types';
+import { ApiUserDetailResponse } from '../Types';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class SidebarService {
   public active = false;
   // If a number -> update user sidebar opens up
   public activeDetailsUserId: number | null = null;
-  public userDetails: Array<MergedUserAdress> = [];
+  public userDetails: Array<any> = [];
   public dbConfigSidebarActive: boolean = false;
   private token = localStorage.getItem("Authorization") ?? "";
   private environment = environment;
