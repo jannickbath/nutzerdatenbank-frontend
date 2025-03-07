@@ -1,14 +1,13 @@
-export type User = {
+export type MicrosoftUser = {
     id: number | string;
-    first_name: string;
-    last_name: string;
-    email: string;
-    description: string;
-    password: string;
-    username: string;
-    personnel_number: number;
-    personio_number: number;
-    adress_id: number;
+    uuid: string;
+    givenName: string;
+    surname: string;
+    mail: string;
+    jobTitle: string;
+    mobilePhone: string;
+    businessPhones: string;
+    displayName: number;
 }
 
 export type Adress = {
@@ -17,24 +16,14 @@ export type Adress = {
     city: string;
 }
 
-export type MergedUserAdress = User & Adress;
-
-export type ApiUserResponse = {
-    users: Array<User>
+export type FetchUserOptions = {
+    appendUsers: boolean;
 }
 
-export type MicrosoftUser = {
-    id: string;
-    displayName: string;
-    givenName: string;
-    surname: string;
-    mail: string;
-    jobTitle: string;
-    mobilePhone: string;
-    businessPhones: Array<string>;
-    officeLocation: string;
-    preferredLanguage: string;
-    userPrincipalName: string;
+// export type MergedUserAdress = User & Adress;
+
+export type ApiUserResponse = {
+    users: Array<MicrosoftUser>
 }
 
 export type PersonioUser = {}
@@ -47,7 +36,7 @@ export type MicrosoftUserResponse = {
 }
 
 export type ApiUserDetailResponse = {
-    users: Array<MergedUserAdress>
+    users: Array<MicrosoftUser>
 }
 
 export type ApiTableResponse = {

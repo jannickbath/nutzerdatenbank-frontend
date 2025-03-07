@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, MicrosoftUserResponse, SearchCategory, User } from '../Types';
+import { ApiColumnResponse, ApiTableResponse, ApiUserResponse, MicrosoftUserResponse, SearchCategory, MicrosoftUser, FetchUserOptions } from '../Types';
 import { UrlSegment } from '@angular/router';
 import { environment } from '../../environments/environment';
 
@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
   private environment = environment;
-  public users: Array<User> = [];
+  public users: Array<MicrosoftUser> = [];
   public tables: Array<string> = [];
   public columns: any = [];
   private tmpColumns: any = [];
@@ -16,17 +16,17 @@ export class ApiService {
   public searchCategories: Array<SearchCategory> = [
     {
       name: "E-Mail",
-      value: "email",
+      value: "mail",
       active: false
     },
     {
       name: "Vorname",
-      value: "first_name",
+      value: "givenName",
       active: false
     },
     {
       name: "Nachname",
-      value: "last_name",
+      value: "surname",
       active: false
     }
   ];
@@ -36,11 +36,11 @@ export class ApiService {
     return this.cleanupColumns(this.tmpColumns);
   }
 
-  public fetchUsers(limit: number = 4, offset: number = 0): void {
+  public fetchUsers(limit: number = 4, offset: number = 0, appendUsers = false): void {
     const baseUrl = `${this.environment.backendUrl}/api/users?limit=${limit}&offset=${offset}`;
-    const microsoftBaseUrl = `${this.environment.backendUrl}/api/merged_users?limit=${limit}&offset=${offset}`;
+    const microsoftBaseUrl = `${this.environment.backendUrl}/api/microsoft_users?limit=${limit}&offset=${offset}`;
     let url = this.search ? (baseUrl + "&search=" + this.search) : baseUrl;
-    let microsoftUrl = this.search ? (microsoftBaseUrl + "&search=" + "\"displayName:" + this.search + "\"") : microsoftBaseUrl;
+    let microsoftUrl = this.search ? (microsoftBaseUrl + "&search=" + this.search) : microsoftBaseUrl;
     const activeFields = this.searchCategories.filter(field => field.active);
 
     const requestHeaders = {
@@ -48,43 +48,20 @@ export class ApiService {
     }
 
     if (this.search && activeFields.length > 0) {
-      url += "&filter=";
-      url += activeFields.map(field => field.value).join(",");
+      microsoftUrl += "&filter=";
+      microsoftUrl += activeFields.map(field => field.value).join(",");
     }
-
-    // fetch(url, { headers: requestHeaders })
-    //   .then(res => res.json())
-    //   .then((json: ApiUserResponse) => {
-    //     if (offset > 0) {
-    //       this.users = [...this.users, ...json.users];
-    //     }else {
-    //       this.users = json.users;
-    //     }delde
-    //   });
 
     fetch(microsoftUrl, { headers: requestHeaders })
       .then(res => res.json())
-      .then((json: MicrosoftUserResponse) => {
-        console.log(json);
-        let locUsers: Array<User> = [];
-    
-        json.value.forEach(user => {
-          locUsers = [...locUsers, {
-            id: user.id,
-            first_name: user.givenName,
-            last_name: user.surname,
-            email: user.mail,
-            description: "",
-            password: "",
-            username: "",
-            adress_id: 0,
-            personnel_number: 0,
-            personio_number: 0
-          }]
-        })
-
-        this.users = [...this.users, ...locUsers];
-      });
+      .then((json) => {
+        if (appendUsers) {
+          this.users = [...this.users, ...json.users];
+        }else {
+          this.users = json.users;
+        }
+      })
+      .then(() => console.log(this.users));
   }
 
   public fetchTables() {
